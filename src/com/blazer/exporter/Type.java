@@ -1,8 +1,8 @@
-package com.blazer.antor;
+package com.blazer.exporter;
 
 
 /**
- * Экспорт типов
+ * Р­РєСЃРїРѕСЂС‚ С‚РёРїРѕРІ
  * @author Constantine
  *
  */
@@ -11,8 +11,13 @@ public class Type extends AbstractEntity{
 		"select uo.object_name, dbms_metadata.get_ddl(uo.object_type, uo.object_name) as ddl "+
 		"from user_objects uo where uo.object_type = 'TYPE'";
 
+    public Type(DataBase dataBase, String dir) {
+        this.dataBase = dataBase;
+        this.dir = dir;
+    }
+
 	@Override
-	public void execute() {
+	public void execute() throws Exception {
 		prepareFolder();
 		exportObjects(query);
 	}	
